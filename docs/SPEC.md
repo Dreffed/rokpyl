@@ -255,6 +255,9 @@ Parsers are local modules only (no package registry/entry points yet).
 - Deduplicate conversations
 - Fill missing metadata
 - Generate transcripts and stable IDs
+  - Stable ID fallback uses a deterministic hash of platform, title, date, and transcript
+  - Transcript is generated from messages when not provided
+  - Dedup precedence: Conversation ID, then URL
 
 ## 12. Error Handling & Observability
 

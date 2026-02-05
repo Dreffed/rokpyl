@@ -36,15 +36,37 @@ class ClaudeImporter(Importer):
         self, source_path: Path, options: dict | None = None
     ) -> List[ConversationRecord]:
         options = options or {}
-        if source_path.suffix.lower() not in {".json", ".jsonl"}:
+        suffix = source_path.suffix.lower()
+        if suffix not in {".json", ".jsonl"}:
             return []
 
-        payload = json.loads(source_path.read_text(encoding="utf-8"))
-        conversations = payload.get("conversations", [])
         records: List[ConversationRecord] = []
         platform = options.get("platform") or "Claude"
         project = options.get("project")
 
+        if suffix == ".jsonl":
+            for line in source_path.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                payload = json.loads(line)
+                records.extend(
+                    self._parse_payload(payload, platform=platform, project=project)
+                )
+            return records
+
+        payload = json.loads(source_path.read_text(encoding="utf-8"))
+        return self._parse_payload(payload, platform=platform, project=project)
+
+    def _parse_payload(
+        self, payload: dict, *, platform: str, project: str | None
+    ) -> List[ConversationRecord]:
+        conversations = payload.get("conversations")
+        if conversations is None and isinstance(payload, list):
+            conversations = payload
+        if conversations is None:
+            conversations = [payload]
+
+        records: List[ConversationRecord] = []
         for convo in conversations:
             messages: List[Message] = []
             transcript_lines: List[str] = []

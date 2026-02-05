@@ -293,3 +293,15 @@ Add a license if you plan to distribute.
 
 Use `configs/local.example.yaml` as a template and save your local overrides to
 `configs/local.yaml` (ignored by git) to avoid committing secrets.
+
+## Running Tests
+
+```bash
+python -m unittest
+```
+
+If your environment doesn't auto-discover `tests/`, run:
+
+```bash
+python -m unittest discover -s tests
+```

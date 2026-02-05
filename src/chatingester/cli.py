@@ -12,7 +12,9 @@ from chatingester.core.config import (
     merge_dicts,
 )
 from chatingester.core.pipeline import Pipeline
-from chatingester.core.registry import ImporterRegistry
+from chatingester.core.registry import ExporterRegistry, ImporterRegistry
+from chatingester.exporters.jsonl import JsonlExporter
+from chatingester.exporters.markdown import MarkdownExporter
 from chatingester.importers.claude import ClaudeImporter
 
 
@@ -86,6 +88,12 @@ def build_registry() -> ImporterRegistry:
     registry.register(ClaudeImporter)
     return registry
 
+def build_exporter_registry() -> ExporterRegistry:
+    registry = ExporterRegistry()
+    registry.register(JsonlExporter)
+    registry.register(MarkdownExporter)
+    return registry
+
 
 def main(argv: List[str] | None = None) -> int:
     args = parse_args(argv)
@@ -98,7 +106,8 @@ def main(argv: List[str] | None = None) -> int:
         raise SystemExit("No inputs provided; use --export-path or --input")
 
     registry = build_registry()
-    pipeline = Pipeline(registry)
+    exporter_registry = build_exporter_registry()
+    pipeline = Pipeline(registry, exporter_registry)
     records = pipeline.run(config)
 
     print(

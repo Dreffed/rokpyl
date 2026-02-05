@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 
 from chatingester.core.pipeline import Pipeline
-from chatingester.core.registry import ImporterRegistry
+from chatingester.core.registry import ExporterRegistry, ImporterRegistry
 from chatingester.importers.base import Importer
 from chatingester.models.canonical import ConversationRecord
 
@@ -27,8 +27,9 @@ class FakeImporter(Importer):
 class PipelineTests(unittest.TestCase):
     def test_pipeline_explicit_parser(self):
         registry = ImporterRegistry()
+        exporter_registry = ExporterRegistry()
         registry.register(FakeImporter)
-        pipeline = Pipeline(registry)
+        pipeline = Pipeline(registry, exporter_registry)
 
         records = pipeline.run(
             {"inputs": [{"path": "./data", "mode": "explicit", "parser": "fake"}]}
