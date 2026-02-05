@@ -36,6 +36,7 @@ For each conversation/chat in an export, the system must:
 ### 3.1 Input Types
 - Unzipped export directory (required)
 - Zip archive (optional; may be unzipped to temp)
+- Multiple inputs per run (mix of zips and folders)
 
 ### 3.2 Export Discovery
 The exporter must:
@@ -43,6 +44,15 @@ The exporter must:
 - Identify likely conversation files (JSON / JSONL / HTML / CSV)
 - Support multiple source files in a single export
 - Merge and deduplicate results
+
+### 3.3 Input Selection Modes
+- Auto-detect:
+  - Scan inputs and choose the best parser using schema hints.
+  - If confidence is similar across parsers, allow multiple to run.
+- Explicit:
+  - User provides file paths and parser names to bypass detection.
+- Hybrid:
+  - Explicit overrides are honored; remaining files are auto-detected.
 
 ---
 
@@ -181,3 +191,122 @@ For each conversation:
 
 - Use platform-provided URL if available
 - Else allow a template:
+  - Example: `https://chat.example.com/c/{id}`
+  - Template keys: `id`, `platform`
+
+---
+
+## 10. CLI Specification
+
+### 10.1 Core Flags
+- `--export-path PATH` (required, repeatable)
+- `--input PATH` (alias of `--export-path`)
+- `--parser NAME` (explicit parser for the next input)
+- `--out-jsonl PATH`
+- `--out-md-dir PATH`
+- `--platform NAME`
+- `--project NAME`
+- `--auto-detect` (enable schema detection when no parser is specified)
+- `--config PATH` (optional config file)
+- `--set KEY=VALUE` (override config values)
+
+### 10.2 Summarization
+- `--ollama-summary`
+- `--ollama-model MODEL`
+- `--ollama-host URL`
+- `--ollama-timeout-s N`
+
+### 10.3 Notion
+- `--notion-sync`
+- `--notion-token TOKEN`
+- `--notion-db-id ID`
+- `--notion-db-name NAME`
+- `--notion-update-contents`
+
+### 10.4 Notion Property Mapping
+- `--prop-title`
+- `--prop-platform`
+- `--prop-project`
+- `--prop-date`
+- `--prop-summary`
+- `--prop-url`
+- `--prop-conversation-id`
+- `--prop-last-synced`
+
+---
+
+## 11. Architecture Requirements
+
+### 11.1 Plugin Parser Interface
+
+Each platform parser must implement:
+
+```python
+discover_sources(export_path) -> list[path]
+can_parse(source_path) -> float
+parse(source_path, options) -> list[ConversationRecord]
+```
+
+Parsers are local modules only (no package registry/entry points yet).
+
+### 11.2 Normalization Layer
+
+- Merge outputs from all parsers
+- Deduplicate conversations
+- Fill missing metadata
+- Generate transcripts and stable IDs
+
+## 12. Error Handling & Observability
+
+- Continue on per-file parse failures
+- Continue on per-record Notion failures
+- Emit summary stats:
+  - Parsed
+  - Created
+  - Updated
+  - Skipped
+  - Failed
+
+## 13. Acceptance Criteria
+
+- Claude export parses successfully
+- JSONL output correct and complete
+- Notion sync:
+  - No duplicates on rerun
+  - Updates existing records
+  - Handles very large transcripts
+- Optional summarization works end-to-end
+
+## 14. Deliverables
+
+```text
+src/chatingester/
+  cli.py
+  core/
+  models/
+  importers/
+  exporters/
+  summarizers/
+plugins/
+docs/
+tests/
+README.md
+docs/SPEC.md
+```
+
+## 15. Constraints & Notes
+
+- Prefer Python stdlib; requests allowed if justified
+- Secrets via env vars or CLI only
+- Must tolerate incomplete or evolving export formats
+- Defensive parsing is mandatory
+
+## 16. Configuration
+
+- Configuration file is optional.
+- Precedence order:
+  1. Defaults
+  2. Config file
+  3. Environment variables
+  4. CLI flags
+- Config file format is defined in `docs/CONFIG.md`.

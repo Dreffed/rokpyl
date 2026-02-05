@@ -80,20 +80,17 @@ Each conversation is normalized into:
 ## Directory Structure
 
 ```text
-exporter/
-  main.py               # CLI entrypoint
-  model.py              # Canonical dataclasses
-  parsers/
-    base.py             # Parser interface
-    claude.py           # Claude export parser
-  notion/
-    client.py           # Notion API client
-    sync.py             # Dedup + upsert logic
-  summarize/
-    ollama.py           # Ollama summary provider
-  tests/
+src/chatingester/
+  cli.py                # CLI entrypoint
+  core/                 # Pipeline, registry, config, errors
+  models/               # Canonical dataclasses
+  importers/            # Platform parsers
+  exporters/            # JSONL/Markdown/Notion/DB/Folder
+  summarizers/          # Optional summary providers
+plugins/                # Local-only plugin modules
+docs/                   # ARCH/DESIGN/SPEC/TEST_PLAN/WORKFLOW
+tests/
 README.md
-SPEC.md
 ```
 
 ---
@@ -146,6 +143,18 @@ pip install -r requirements.txt  # if used
 
 ```bash
 python main.py   --export-path /path/to/claude-export   --out-jsonl conversations.jsonl
+```
+
+### Multiple Inputs (Auto-Detect)
+
+```bash
+python main.py   --export-path /exports/claude.zip   --export-path /exports/chatgpt   --auto-detect   --out-jsonl conversations.jsonl
+```
+
+### Explicit Parser Selection
+
+```bash
+python main.py   --export-path /exports/claude.zip   --parser claude   --export-path /exports/custom.json   --parser my_custom_parser   --out-jsonl conversations.jsonl
 ```
 
 ### Export + Markdown
@@ -217,6 +226,11 @@ parse(source_path) -> list[ConversationRecord]
 
 All outputs must map to the canonical schema in `model.py`.
 
+### Dynamic Detection vs Explicit Parser Selection
+- Auto-detect: scan inputs and select the best parser by schema hints.
+- Explicit: user can target specific files and parser names to bypass detection.
+- Hybrid: explicit overrides + auto-detection for remaining files.
+
 ---
 
 ## Error Handling
@@ -265,5 +279,9 @@ Add a license if you plan to distribute.
 
 ## Related Docs
 
-- `SPEC.md` – Full technical specification
-- `model.py` – Canonical data schema
+- `docs/ARCH.md` – System architecture and plugin strategy
+- `docs/CONFIG.md` – Config file format and precedence
+- `docs/DESIGN.md` – Module layout and interfaces
+- `docs/SPEC.md` – Full technical specification
+- `docs/TEST_PLAN.md` – Test strategy and coverage map
+- `docs/WORKFLOW.md` – ARCH → Design → SPEC → TDD → test → deploy flow
