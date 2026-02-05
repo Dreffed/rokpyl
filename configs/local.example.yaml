@@ -1,0 +1,19 @@
+inputs:
+  - path: /exports/claude.zip
+    mode: auto
+  - path: /exports/custom.json
+    mode: explicit
+    parser: my_custom_parser
+outputs:
+  - type: jsonl
+    path: /output/conversations.jsonl
+  - type: markdown
+    dir: /output/chats_md
+  - type: notion
+    token_env: NOTION_TOKEN
+    db_id_env: NOTION_DB_ID
+    update_contents: false
+summarize:
+  enabled: true
+  provider: ollama
+  model: llama3.1:8b

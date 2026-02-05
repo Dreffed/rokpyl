@@ -1,0 +1,13 @@
+{
+  "conversations": [
+    {
+      "id": "c1",
+      "title": "Demo",
+      "date": "2024-01-01T00:00:00Z",
+      "messages": [
+        {"role": "user", "content": "Hi"},
+        {"role": "assistant", "content": "Hello"}
+      ]
+    }
+  ]
+}

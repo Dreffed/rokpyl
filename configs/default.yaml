@@ -1,0 +1,25 @@
+project: null
+platform: null
+inputs: []
+outputs: []
+summarize:
+  enabled: false
+  provider: ollama
+  model: llama3.1:8b
+  host: http://localhost:11434
+  timeout_s: 60
+notion:
+  token_env: NOTION_TOKEN
+  db_id_env: NOTION_DB_ID
+  db_name: null
+  update_contents: false
+  chunk_size: 1800
+  properties:
+    title: Chat Title
+    platform: Platform
+    project: Project
+    date: Date
+    summary: Summary
+    url: URL
+    conversation_id: Conversation ID
+    last_synced: Last Synced

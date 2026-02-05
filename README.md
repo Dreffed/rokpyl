@@ -285,3 +285,11 @@ Add a license if you plan to distribute.
 - `docs/SPEC.md` – Full technical specification
 - `docs/TEST_PLAN.md` – Test strategy and coverage map
 - `docs/WORKFLOW.md` – ARCH → Design → SPEC → TDD → test → deploy flow
+
+## Config Examples
+
+- `configs/default.yaml`
+- `configs/local.example.yaml`
+
+Use `configs/local.example.yaml` as a template and save your local overrides to
+`configs/local.yaml` (ignored by git) to avoid committing secrets.

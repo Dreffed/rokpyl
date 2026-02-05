@@ -1,0 +1,1 @@
+{"id":"c1","title":"Demo","platform":"Claude","project":null,"date":"2024-01-01T00:00:00Z","summary":null,"url":null,"transcript":"user: Hi\nassistant: Hello","messages":[{"role":"user","content":"Hi","created_at":null,"attachments":[],"extra":{}},{"role":"assistant","content":"Hello","created_at":null,"attachments":[],"extra":{}}],"metadata":{}}
