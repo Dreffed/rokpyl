@@ -21,7 +21,7 @@ class ClaudeParsingTests(unittest.TestCase):
 
     def test_parse_minimal_jsonl_fixture(self):
         root = Path(__file__).parent / "fixtures"
-        source = root / "claude_minimal.jsonl_input"
+        source = root / "claude_minimal_input.jsonl"
         expected = json.loads((root / "claude_minimal.jsonl").read_text(encoding="utf-8"))
 
         importer = ClaudeImporter()
@@ -33,7 +33,7 @@ class ClaudeParsingTests(unittest.TestCase):
 
     def test_parse_jsonl_with_blanks_and_comments(self):
         root = Path(__file__).parent / "fixtures"
-        source = root / "claude_minimal_with_blanks.jsonl_input"
+        source = root / "claude_minimal_with_blanks.jsonl"
         expected = json.loads((root / "claude_minimal.jsonl").read_text(encoding="utf-8"))
 
         importer = ClaudeImporter()

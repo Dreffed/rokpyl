@@ -17,6 +17,7 @@ from chatingester.exporters.jsonl import JsonlExporter
 from chatingester.exporters.markdown import MarkdownExporter
 from chatingester.exporters.notion import NotionExporter
 from chatingester.importers.claude import ClaudeImporter
+from chatingester.importers.chatgpt import ChatGptImporter
 
 
 def parse_inputs(args: argparse.Namespace) -> List[Dict[str, Any]]:
@@ -87,6 +88,7 @@ def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
 def build_registry() -> ImporterRegistry:
     registry = ImporterRegistry()
     registry.register(ClaudeImporter)
+    registry.register(ChatGptImporter)
     return registry
 
 def build_exporter_registry() -> ExporterRegistry:

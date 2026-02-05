@@ -61,29 +61,51 @@ class ClaudeImporter(Importer):
     def _parse_payload(
         self, payload: dict, *, platform: str, project: str | None
     ) -> List[ConversationRecord]:
-        conversations = payload.get("conversations")
-        if conversations is None and isinstance(payload, list):
-            conversations = payload
-        if conversations is None:
+        conversations = payload
+        if isinstance(payload, dict):
+            conversations = payload.get("conversations", payload)
+        if isinstance(conversations, dict):
+            conversations = [conversations]
+        if not isinstance(conversations, list):
             conversations = [payload]
 
         records: List[ConversationRecord] = []
         for convo in conversations:
             messages: List[Message] = []
             transcript_lines: List[str] = []
-            for message in convo.get("messages", []):
-                role = message.get("role") or "unknown"
-                content = message.get("content") or ""
-                messages.append(Message(role=role, content=content))
+            raw_messages = convo.get("chat_messages")
+            if raw_messages is None:
+                raw_messages = convo.get("messages", [])
+            for message in raw_messages or []:
+                role = message.get("role") or message.get("sender") or "unknown"
+                if role == "human":
+                    role = "user"
+                content = message.get("content")
+                if isinstance(content, dict):
+                    content = content.get("text") or content.get("value")
+                if content is None:
+                    content = message.get("text") or ""
+                messages.append(
+                    Message(
+                        role=role,
+                        content=str(content),
+                        created_at=message.get("created_at"),
+                    )
+                )
                 transcript_lines.append(f"{role}: {content}")
 
             records.append(
                 ConversationRecord(
-                    id=str(convo.get("id") or ""),
-                    title=str(convo.get("title") or "Untitled conversation"),
+                    id=str(convo.get("uuid") or convo.get("id") or ""),
+                    title=str(
+                        convo.get("name")
+                        or convo.get("title")
+                        or "Untitled conversation"
+                    ),
                     platform=platform,
                     project=project,
-                    date=convo.get("date"),
+                    date=convo.get("created_at") or convo.get("date") or convo.get("updated_at"),
+                    summary=convo.get("summary"),
                     transcript="\n".join(transcript_lines),
                     messages=messages,
                 )

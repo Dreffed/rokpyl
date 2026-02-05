@@ -1,0 +1,23 @@
+[
+  {
+    "id": "g1",
+    "title": "ChatGPT Demo",
+    "create_time": 1704067200,
+    "mapping": {
+      "a": {
+        "message": {
+          "author": {"role": "user"},
+          "content": {"parts": ["Hi"]},
+          "create_time": 1704067200
+        }
+      },
+      "b": {
+        "message": {
+          "author": {"role": "assistant"},
+          "content": {"parts": ["Hello"]},
+          "create_time": 1704067210
+        }
+      }
+    }
+  }
+]
