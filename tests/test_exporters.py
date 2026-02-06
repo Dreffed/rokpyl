@@ -45,7 +45,7 @@ class ExporterTests(unittest.TestCase):
             self.assertEqual(len(output_files), 1)
             contents = output_files[0].read_text(encoding="utf-8")
             self.assertIn("# Demo", contents)
-            self.assertIn("## Contents", contents)
+            self.assertIn("## Messages", contents)
 
 
 if __name__ == "__main__":
