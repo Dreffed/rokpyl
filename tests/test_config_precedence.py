@@ -1,17 +1,17 @@
 import os
 import unittest
 
-from chatingester.core.config import apply_env_overrides, apply_set_overrides
+from rokpyl.core.config import apply_env_overrides, apply_set_overrides
 
 
 class ConfigPrecedenceTests(unittest.TestCase):
     def test_env_then_set_override(self):
         base = {"project": "Config"}
-        os.environ["CHATINGESTER__PROJECT"] = "Env"
+        os.environ["rokpyl__PROJECT"] = "Env"
         try:
             env_config = apply_env_overrides(base)
         finally:
-            os.environ.pop("CHATINGESTER__PROJECT", None)
+            os.environ.pop("rokpyl__PROJECT", None)
 
         self.assertEqual(env_config["project"], "Env")
 

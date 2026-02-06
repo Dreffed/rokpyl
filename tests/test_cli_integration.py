@@ -6,7 +6,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from contextlib import redirect_stdout
 
-from chatingester.cli import main
+from rokpyl.cli import main
 
 
 class CliIntegrationTests(unittest.TestCase):
@@ -104,7 +104,7 @@ class CliIntegrationTests(unittest.TestCase):
         with TemporaryDirectory() as tmpdir:
             out_path = Path(tmpdir) / "out.jsonl"
             buffer = StringIO()
-            env_key = "CHATINGESTER__PROJECT"
+            env_key = "rokpyl__PROJECT"
             original = os.environ.get(env_key)
             os.environ[env_key] = "EnvProject"
             try:

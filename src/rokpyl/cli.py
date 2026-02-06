@@ -1,23 +1,23 @@
-"""CLI entrypoint for ChatIngester."""
+"""CLI entrypoint for rokpyl."""
 from __future__ import annotations
 
 import argparse
 from typing import Any, Dict, List, Tuple
 
-from chatingester.core.config import (
+from rokpyl.core.config import (
     ConfigError,
     apply_env_overrides,
     apply_set_overrides,
     load_config,
     merge_dicts,
 )
-from chatingester.core.pipeline import Pipeline
-from chatingester.core.registry import ExporterRegistry, ImporterRegistry
-from chatingester.exporters.jsonl import JsonlExporter
-from chatingester.exporters.markdown import MarkdownExporter
-from chatingester.exporters.notion import NotionExporter
-from chatingester.importers.claude import ClaudeImporter
-from chatingester.importers.chatgpt import ChatGptImporter
+from rokpyl.core.pipeline import Pipeline
+from rokpyl.core.registry import ExporterRegistry, ImporterRegistry
+from rokpyl.exporters.jsonl import JsonlExporter
+from rokpyl.exporters.markdown import MarkdownExporter
+from rokpyl.exporters.notion import NotionExporter
+from rokpyl.importers.claude import ClaudeImporter
+from rokpyl.importers.chatgpt import ChatGptImporter
 
 
 def parse_inputs(args: argparse.Namespace) -> List[Dict[str, Any]]:
@@ -58,7 +58,7 @@ def build_config(args: argparse.Namespace) -> Dict[str, Any]:
 
 
 def parse_args(argv: List[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="ChatIngester CLI")
+    parser = argparse.ArgumentParser(description="rokpyl CLI")
     parser.add_argument("--config", help="Path to config file")
     parser.add_argument("--set", dest="set_values", action="append")
 

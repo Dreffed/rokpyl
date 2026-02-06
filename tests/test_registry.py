@@ -1,7 +1,7 @@
 import unittest
 
-from chatingester.core.registry import ImporterRegistry
-from chatingester.importers.base import Importer
+from rokpyl.core.registry import ImporterRegistry
+from rokpyl.importers.base import Importer
 
 
 class FakeImporter(Importer):

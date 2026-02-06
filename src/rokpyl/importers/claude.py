@@ -5,8 +5,8 @@ from pathlib import Path
 import json
 from typing import List
 
-from chatingester.importers.base import Importer
-from chatingester.models.canonical import ConversationRecord, Message
+from rokpyl.importers.base import Importer
+from rokpyl.models.canonical import ConversationRecord, Message
 
 
 def _coerce_text(value: object) -> str:

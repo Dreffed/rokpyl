@@ -139,7 +139,7 @@ def _parse_env_path(key: str) -> List[str | int]:
 
 def apply_env_overrides(config: Dict[str, Any]) -> Dict[str, Any]:
     result = dict(config)
-    prefix = "CHATINGESTER__"
+    prefix = "rokpyl__"
     for env_key, value in os.environ.items():
         if not env_key.startswith(prefix):
             continue

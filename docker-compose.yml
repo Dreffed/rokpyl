@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  rokpyl:
+    build: .
+    image: rokpyl:local
+    volumes:
+      - ./configs:/app/configs
+      - ./output:/app/output
+      - /mnt/data:/data:ro
+    working_dir: /app
+    entrypoint: ["python", "-m", "rokpyl.cli"]
+    command: ["--help"]

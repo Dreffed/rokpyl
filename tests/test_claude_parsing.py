@@ -3,7 +3,7 @@ import unittest
 from dataclasses import asdict
 from pathlib import Path
 
-from chatingester.importers.claude import ClaudeImporter
+from rokpyl.importers.claude import ClaudeImporter
 
 
 class ClaudeParsingTests(unittest.TestCase):

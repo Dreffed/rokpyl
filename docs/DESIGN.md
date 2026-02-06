@@ -2,7 +2,7 @@
 
 ## Module Layout (Proposed)
 ```
-src/chatingester/
+src/rokpyl/
   cli.py
   core/
     pipeline.py

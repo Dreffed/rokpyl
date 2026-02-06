@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Iterable, List, Tuple, Type
 
-from chatingester.importers.base import Importer
+from rokpyl.importers.base import Importer
 
 
 def score_importer(importer_cls: Type[Importer], source_path: Path) -> float:

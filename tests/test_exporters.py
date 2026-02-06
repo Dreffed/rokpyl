@@ -4,9 +4,9 @@ from dataclasses import asdict
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from chatingester.exporters.jsonl import JsonlExporter
-from chatingester.exporters.markdown import MarkdownExporter
-from chatingester.models.canonical import ConversationRecord, Message
+from rokpyl.exporters.jsonl import JsonlExporter
+from rokpyl.exporters.markdown import MarkdownExporter
+from rokpyl.models.canonical import ConversationRecord, Message
 
 
 class ExporterTests(unittest.TestCase):

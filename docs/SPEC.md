@@ -283,7 +283,7 @@ Parsers are local modules only (no package registry/entry points yet).
 ## 14. Deliverables
 
 ```text
-src/chatingester/
+src/rokpyl/
   cli.py
   core/
   models/

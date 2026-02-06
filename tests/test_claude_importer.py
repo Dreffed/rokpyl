@@ -2,7 +2,7 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from chatingester.importers.claude import ClaudeImporter
+from rokpyl.importers.claude import ClaudeImporter
 
 
 class ClaudeImporterTests(unittest.TestCase):

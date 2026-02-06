@@ -42,7 +42,7 @@ Inputs (zip/folder)
   - Explicit overrides are honored; remaining files are auto-detected.
 
 ## Plugin Strategy (Local Only)
-- Importers/exporters live in the repo under `src/chatingester/*`.
+- Importers/exporters live in the repo under `src/rokpyl/*`.
 - Optional `plugins/` directory for local custom modules.
 - Registry resolves by name to local modules only.
 

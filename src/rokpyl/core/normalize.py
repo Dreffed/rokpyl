@@ -4,7 +4,7 @@ from __future__ import annotations
 import hashlib
 from typing import List
 
-from chatingester.models.canonical import ConversationRecord, Message
+from rokpyl.models.canonical import ConversationRecord, Message
 
 
 def _build_transcript(messages: List[Message]) -> str:

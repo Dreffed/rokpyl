@@ -102,8 +102,8 @@ platform: null
 ```
 
 ## Environment Overrides
-- Prefix: `CHATINGESTER__`
+- Prefix: `rokpyl__`
 - Separator: double underscore (`__`)
 - Example:
-  - `CHATINGESTER__PROJECT=Research`
-  - `CHATINGESTER__OUTPUTS__0__TYPE=jsonl`
+  - `rokpyl__PROJECT=Research`
+  - `rokpyl__OUTPUTS__0__TYPE=jsonl`

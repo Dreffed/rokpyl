@@ -3,8 +3,8 @@ from __future__ import annotations
 
 from typing import Dict, List, Type
 
-from chatingester.importers.base import Importer
-from chatingester.exporters.base import Exporter
+from rokpyl.importers.base import Importer
+from rokpyl.exporters.base import Exporter
 
 
 class ImporterRegistry:

@@ -1,6 +1,6 @@
 import unittest
 
-from chatingester.core.config import apply_set_overrides
+from rokpyl.core.config import apply_set_overrides
 
 
 class ConfigSetTests(unittest.TestCase):

@@ -1,7 +1,7 @@
 import unittest
 
-from chatingester.core.normalize import normalize_records
-from chatingester.models.canonical import ConversationRecord, Message
+from rokpyl.core.normalize import normalize_records
+from rokpyl.models.canonical import ConversationRecord, Message
 
 
 class NormalizeTests(unittest.TestCase):

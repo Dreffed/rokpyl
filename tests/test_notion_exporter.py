@@ -1,7 +1,7 @@
 import unittest
 
-from chatingester.exporters.notion import NotionExporter
-from chatingester.models.canonical import ConversationRecord
+from rokpyl.exporters.notion import NotionExporter
+from rokpyl.models.canonical import ConversationRecord
 
 
 class NotionExporterTests(unittest.TestCase):

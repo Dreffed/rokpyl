@@ -6,8 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import List
 
-from chatingester.importers.base import Importer
-from chatingester.models.canonical import ConversationRecord, Message
+from rokpyl.importers.base import Importer
+from rokpyl.models.canonical import ConversationRecord, Message
 
 
 def _to_iso(value) -> str | None:

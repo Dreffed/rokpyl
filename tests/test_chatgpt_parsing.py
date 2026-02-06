@@ -3,7 +3,7 @@ import unittest
 from dataclasses import asdict
 from pathlib import Path
 
-from chatingester.importers.chatgpt import ChatGptImporter
+from rokpyl.importers.chatgpt import ChatGptImporter
 
 
 class ChatGptParsingTests(unittest.TestCase):

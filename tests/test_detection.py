@@ -1,8 +1,8 @@
 import unittest
 from pathlib import Path
 
-from chatingester.core.detection import select_importers
-from chatingester.importers.base import Importer
+from rokpyl.core.detection import select_importers
+from rokpyl.importers.base import Importer
 
 
 class HighScoreImporter(Importer):

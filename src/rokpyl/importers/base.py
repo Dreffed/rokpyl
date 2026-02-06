@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Iterable, List
 
-from chatingester.models.canonical import ConversationRecord
+from rokpyl.models.canonical import ConversationRecord
 
 
 class Importer(ABC):

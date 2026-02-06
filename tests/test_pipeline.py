@@ -1,10 +1,10 @@
 import unittest
 from pathlib import Path
 
-from chatingester.core.pipeline import Pipeline
-from chatingester.core.registry import ExporterRegistry, ImporterRegistry
-from chatingester.importers.base import Importer
-from chatingester.models.canonical import ConversationRecord
+from rokpyl.core.pipeline import Pipeline
+from rokpyl.core.registry import ExporterRegistry, ImporterRegistry
+from rokpyl.importers.base import Importer
+from rokpyl.models.canonical import ConversationRecord
 
 
 class FakeImporter(Importer):

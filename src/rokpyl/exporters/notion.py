@@ -3,8 +3,8 @@ from __future__ import annotations
 2
 from typing import List
 
-from chatingester.exporters.base import Exporter
-from chatingester.models.canonical import ConversationRecord
+from rokpyl.exporters.base import Exporter
+from rokpyl.models.canonical import ConversationRecord
 
 
 class NotionExporter(Exporter):

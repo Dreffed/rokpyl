@@ -4,11 +4,11 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Type
 
-from chatingester.core.detection import select_importers
-from chatingester.core.normalize import normalize_records
-from chatingester.core.registry import ExporterRegistry, ImporterRegistry
-from chatingester.importers.base import Importer
-from chatingester.models.canonical import ConversationRecord
+from rokpyl.core.detection import select_importers
+from rokpyl.core.normalize import normalize_records
+from rokpyl.core.registry import ExporterRegistry, ImporterRegistry
+from rokpyl.importers.base import Importer
+from rokpyl.models.canonical import ConversationRecord
 
 
 class Pipeline:

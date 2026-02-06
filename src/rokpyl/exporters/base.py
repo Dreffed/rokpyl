@@ -4,7 +4,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List
 
-from chatingester.models.canonical import ConversationRecord
+from rokpyl.models.canonical import ConversationRecord
 
 
 class Exporter(ABC):
